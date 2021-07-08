@@ -13,6 +13,10 @@ def main():
 def performance():
     return render_template('performance.html')
 
+@app.route("/recommend")
+def recommend():
+    return render_template('recommend.html')
+
 # API 역할을 하는 부분
 def get_performance_list():
     return ''

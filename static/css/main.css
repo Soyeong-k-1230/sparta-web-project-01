@@ -15,3 +15,11 @@ html {
 .logo-btn:hover {
     color: aquamarine;
 }
+
+.nav-a {
+    color: #F5F5F1;
+}
+
+.nav-a:hover {
+    color: aquamarine;
+}

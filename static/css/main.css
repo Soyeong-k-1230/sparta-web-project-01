@@ -7,3 +7,11 @@
 html {
    background-color: #221F1F;
 }
+
+.logo-btn {
+    cursor: pointer;
+}
+
+.logo-btn:hover {
+    color: aquamarine;
+}

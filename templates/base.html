@@ -28,20 +28,25 @@
 </head>
   <body>
   <div class="px-5 py-3">
-    <ul class="nav justify-content-end">
+    <div class="d-flex justify-content-between">
+      <div class="py-2 logo-btn" onclick="window.location.href=`{{ url_for('main') }}`;">Logo</div>
+      <div>
+        <ul class="nav justify-content-end">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/performance">공연</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">추천</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">캘린더</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
+      </div>
+    </div>
   </div>
   <div id="content">{% block content %}{% endblock %}</div>
 

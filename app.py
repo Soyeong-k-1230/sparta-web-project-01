@@ -3,18 +3,28 @@ import requests
 import xmltodict, json
 from flask import Flask, render_template
 from dotenv import load_dotenv
+from datetime import date
 
+load_dotenv(verbose=True)
 app = Flask(__name__)
 API_KEY = os.getenv('API_KEY')
+BASE_URL = 'http://www.kopis.or.kr/openApi/restful/pblprfr?service=' + API_KEY
 
 # HTML 화면 보여주기
 @app.route("/")
 def main():
-    r = requests.get('http://www.kopis.or.kr/openApi/restful/pblprfr?service=4c63018be1fc4d10a6118f339347226f&stdate=20210601&eddate=20210731&cpage=1&rows=10&prfstate=02&signgucode=11&signgucodesub=1111')
+    today = date.today()
+    st_date = '&stdate=' + today.strftime("%Y%m01")
+    ed_date = '&eddate=' + today.strftime("%Y%m31")
+    r = requests.get(BASE_URL + st_date + ed_date + '&cpage=1&rows=10&prfstate=02&signgucode=11&signgucodesub=1111')
     obj = xmltodict.parse(r.text)
-    data = json.dumps(obj['dbs']['db'], ensure_ascii=False)
-    print(API_KEY)
-    return render_template('index.html', data=data)
+    performances = []
+
+    for performance in obj['dbs']['db']:
+        data = json.dumps(performance, ensure_ascii=False)
+        performances.append(data)
+    print(performances)
+    return render_template('index.html', performances=performances)
 
 @app.route("/performance")
 def performance():

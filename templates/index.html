@@ -5,42 +5,31 @@
   <link rel="stylesheet" type="text/css" href="../static/css/home.css">
 {% endblock %}
 {% block content %}
-<div class="container">
-  <div class="container">
-    <h5 class="red">At the moment</h5>
-      {% for item in data %}
-      {% endfor %}
-    <div class="card-deck">
-
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
+  <div>
+    <div class="header">
+      <div class="header-intro">
+        <p class="animate__animated animate__fadeInLeft">공연 예술(公演藝術, performing art)</p>
+        <p style="font-size: 1.2rem;">표현자와 관객이 같은 시간과 공간을 공유하면서</p>
+        <p style="font-size: 1.2rem;">그 자리에서 작품의 실체가 만들어져 가는 형태의 예술.</p>
+        <button type="button" class="btn btn-outline-light">공연 보러가기</button>
       </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <video
+        loop
+        autoplay
+        playsinline
+        muted
+        preload="none"
+        style="width: 100%;"
+        src="../static/video/main_v2.mp4"></video>
+      <div class="section container">
+        <h4>At the moment</h4>
+        <div class="mt-5">
+          {% for performance in performances %}
+            <div>{{ performance }}</div>
+          {% endfor %}
         </div>
       </div>
     </div>
 
   </div>
-</div>
 {% endblock %}

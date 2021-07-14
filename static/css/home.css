@@ -1,3 +1,25 @@
-.red {
-    color: aquamarine;
+.header {
+    position: absolute;
+    top:0;
+    z-index: 99
+}
+.header-intro {
+    z-index: 102;
+    position: absolute;
+    background-color: transparent;
+    top: 60vh;
+    left: 10vw;
+    font-size: 30px;
+}
+
+.header-intro p {
+    background-color: transparent;
+}
+
+
+.section {
+    position: relative;
+    z-index: 101;
+    margin-top: 65px;
+    margin-bottom: 80px;
 }

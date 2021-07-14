@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   {% block head %}
   <title>{% block title %}{% endblock %} - My Webpage</title>
+
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!--  Google fonts  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/8d37770efa.js" crossorigin="anonymous"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -28,23 +33,23 @@
 </head>
   <body>
   <div class="px-5 py-3">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between navigation">
       <div class="py-2 logo-btn" onclick="window.location.href=`{{ url_for('main') }}`;">Logo</div>
-      <div>
-        <ul class="nav justify-content-end">
-      <li class="nav-item">
-        <a class="nav-link active nav-a" aria-current="page" href="/performance">공연</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-a" href="/recommend">추천</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-a" href="#">캘린더</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
+      <div class="nav-list">
+        <ul class="nav nav-list justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link active nav-a" aria-current="page" href="/performance">공연</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-a" href="/recommend">추천</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-a" href="#">방명록</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

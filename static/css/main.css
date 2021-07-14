@@ -9,17 +9,34 @@ html {
 }
 
 .logo-btn {
-    cursor: pointer;
+    background-color: transparent;
 }
 
 .logo-btn:hover {
-    color: aquamarine;
+    cursor: pointer;
+    color: #45B5AA;
+}
+
+.navigation {
+    z-index: 100;
+    position: relative;
+    background-color: transparent;
+}
+
+.nav-list {
+    background-color: transparent !important;
+}
+
+.nav-item {
+    background-color: transparent !important;
 }
 
 .nav-a {
     color: #F5F5F1;
+    background-color: transparent;
 }
 
 .nav-a:hover {
-    color: aquamarine;
+    color: #45B5AA;
+    font-weight: bold;
 }

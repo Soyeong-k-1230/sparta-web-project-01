@@ -16,10 +16,34 @@
     background-color: transparent;
 }
 
-
 .section {
     position: relative;
     z-index: 101;
     margin-top: 65px;
     margin-bottom: 80px;
+}
+
+.img-hover-zoom {
+    height: 300px;
+    overflow: hidden;
+    background-color:rgb(31, 31, 31) !important;
+  }
+
+.img-hover-zoom img {
+    transition: transform .5s ease;
+}
+
+.img-hover-zoom:hover{
+    cursor: pointer;
+}
+.img-hover-zoom:hover img {
+    transform: scale(1.5);
+    opacity: 0.4;
+}
+.img-hover-zoom div {
+    visibility: hidden;
+}
+.img-hover-zoom:hover div {
+    visibility: visible;
+    font-size: 30px;
 }

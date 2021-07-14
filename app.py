@@ -22,8 +22,8 @@ def main():
 
     for performance in obj['dbs']['db']:
         data = json.dumps(performance, ensure_ascii=False)
-        performances.append(data)
-    print(performances)
+        performances.append(json.loads(data))
+
     return render_template('index.html', performances=performances)
 
 @app.route("/performance")

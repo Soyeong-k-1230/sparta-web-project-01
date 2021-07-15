@@ -21,11 +21,10 @@
             preload="none"
             style="width: 100%;"
             src="../static/video/main_v2.mp4"></video>
-    <div class="section container">
-      <h4>At the moment</h4>
-      <div class="mt-5">
 
-      </div>
+    <div class="section container">
+      <div></div>
+      <h4>At the moment<span class="ml-3 more-btn" style="font-size: 1rem;">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
       <div class="mt-5">
         <div id="gallery-1" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -35,6 +34,10 @@
                 <div class="col text-center img-hover-zoom">
                   <img class="img-fluid" style="height: 270px;"
                        src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
                 </div>
                 {% endfor %}
               </div>
@@ -45,6 +48,10 @@
                 <div class="col text-center img-hover-zoom">
                   <img class="img-fluid" style="height: 270px;"
                        src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
                 </div>
                 {% endfor %}
               </div>
@@ -61,7 +68,19 @@
         </div>
       </div>
     </div>
+
+    <div class="footer">
+      <div class="container footer-inner">
+        <p class="text-center">
+          <span>2021</span>
+          <span class="mr-1">&copy;</span>
+          <a href="" target="_blank" rel="nofollow">The Arts.</a>
+        </p>
+      </div>
+    </div>
+
   </div>
+
 
 </div>
 {% endblock %}

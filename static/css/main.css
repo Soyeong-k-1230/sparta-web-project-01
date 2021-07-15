@@ -10,6 +10,8 @@ html {
 
 .logo-btn {
     background-color: transparent;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .logo-btn:hover {

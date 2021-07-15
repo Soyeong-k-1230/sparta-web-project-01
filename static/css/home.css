@@ -27,6 +27,7 @@
     height: 300px;
     overflow: hidden;
     background-color:rgb(31, 31, 31) !important;
+    position: relative;
   }
 
 .img-hover-zoom img {
@@ -45,5 +46,63 @@
 }
 .img-hover-zoom:hover div {
     visibility: visible;
-    font-size: 30px;
+    font-size: 20px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 10px;
+    background-color: transparent !important;
+    text-align: left;
+
+}
+
+.text-title {
+    transition: .5s ease;
+    background-color: transparent !important;
+}
+
+.text-place {
+    transition: .5s ease !important;
+    background-color: transparent !important;
+    font-size: 12px !important;
+}
+
+.more-btn:hover, .more-btn > i:hover{
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.more-btn {
+    z-index: 104;
+    color: #45B5AA;
+}
+.more-btn > i {
+    z-index: 103;
+    color: #45B5AA;
+}
+
+.footer {
+    border-top: 1px solid;
+    border-color: rgba(256,256,256,0.25);
+}
+
+.footer-inner {
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.footer-inner > p > a {
+    color: #45B5AA !important;
+}
+
+@media screen and (max-width: 1300px) {
+   .header-intro {
+        z-index: 102;
+        position: absolute;
+        background-color: transparent;
+        top: 30vh;
+        left: 10vw;
+        font-size: 20px;
+    }
 }

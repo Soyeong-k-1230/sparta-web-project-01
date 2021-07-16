@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Guest Book{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/board.css">
+{% endblock %}
+{% block content %}
+<div>
+  <div id="board">
+    <div class="header-img">
+      <h2 class="text">Guest Book</h2>
+    </div>
+    <div class="container text-center">
+      <div class="intro">
+        <p class="mt-5" style="font-size: 1.2rem;">The Arts에 오신 것을 환영합니다! </p>
+        <p>방명록을 작성해 주세요 <i class="far fa-smile"></i></p>
+        <button type="button" class="btn btn-outline-light mt-3" data-bs-toggle="modal" data-bs-target="#writeModal">글쓰기</button>
+      </div>
+      <div class="mt-5 container">
+        <div id="comments-box" class="row">
+          <div class="col-6 my-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This content is a little bit longer.</h5>
+                <p class="card-title">Card title</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">방명록 작성하기</h5>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="email" class="form-control" id="name" placeholder="나는야 OOO">
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">하고싶은 말</label>
+            <textarea class="form-control" id="content" rows="3" placeholder="안녕하세요 :)"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal" onclick="closeModal()">닫기</button>
+          <button onclick="makeComment()" type="button" class="btn btn-main-color">작성하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include '_footer.html' %}
+</div>
+<script>
+
+    $(document).ready(function () {
+        $("#comments-box").html("")
+        showComment()
+    })
+
+  function makeComment() {
+      let name = $('#name').val()
+      let content = $('textarea#content').val()
+
+      if (name.trim() === '' || content.trim() === '') {
+          if (name.trim() === '') {
+              alert('이름을 작성해 주세요!')
+          } else {
+              alert('내용을 작성해 주세요!')
+          }
+          return
+      }
+
+      $.ajax({
+          type: "POST",
+          url: "/comment",
+          data: {
+              name: name,
+              content: content,
+          },
+          success: function (response) {
+              alert(response["msg"]);
+              window.location.reload();
+          }
+      })
+
+      $('#name').val('')
+      $('textarea#content').val('')
+
+  }
+
+  function showComment() {
+      $.ajax({
+          type: "GET",
+          url: "/comment",
+          data: {},
+          success: function (response) {
+              let comments = response["all_comments"];
+              for (let i = 0; i < comments.length; i++) {
+                  let name = comments[i]['name']
+                  let content = comments[i]['content']
+                  let date = comments[i]['date']
+
+                  let tempHtml = `<div class="col-6 my-3">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <h5 class="card-text pb-2">${content}</h5>
+                                        <p class="card-title pt-1">${name}</p>
+                                        <p class="card-text"><small class="text-muted">${date}</small></p>
+                                      </div>
+                                    </div>
+                                  </div>`
+                  $('#comments-box').append(tempHtml)
+              }
+          }
+      })
+  }
+
+  function closeModal() {
+      $('#name').val('')
+      $('textarea#content').val('')
+  }
+
+</script>
+{% endblock %}

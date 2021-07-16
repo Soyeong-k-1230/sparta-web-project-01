@@ -42,3 +42,17 @@ html {
     color: #45B5AA;
     font-weight: bold;
 }
+
+.footer {
+    border-top: 1px solid;
+    border-color: rgba(256,256,256,0.25);
+}
+
+.footer-inner {
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.footer-inner > p > a {
+    color: #45B5AA !important;
+}

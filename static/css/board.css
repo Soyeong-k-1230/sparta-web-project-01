@@ -1,0 +1,76 @@
+#board {
+    margin-bottom: 60px;
+}
+
+.header-img {
+    position: relative;
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../image/board-header.jpg');
+    background-size: cover;
+}
+
+.header-img::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.45);
+}
+
+.header-img > h2 {
+  position: relative;
+  color: #ffffff;
+  font-size: 3rem;
+  line-height: 0.9;
+  text-align: center;
+  background-color: transparent !important;
+}
+
+.bar {
+  border-top: #F5F5F1;
+}
+
+.modal-open .modal {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.modal.show .modal-dialog {
+    background-color: transparent;
+}
+
+.modal-content {
+    background-color: transparent;
+}
+
+.modal-footer {
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.btn-main-color {
+    color: #45B5AA;
+    background-color: transparent;
+    background-image: none;
+    border-color: #45B5AA;
+}
+
+.btn-main-color:hover {
+    background-color: #45B5AA;
+    color: #221F1F;
+}
+
+.form-control {
+    background-color: #221F1F;
+    color: #F5F5F1;
+}
+
+.form-control:focus {
+    background-color: #221F1F;
+    color: #F5F5F1;
+}

@@ -8,6 +8,10 @@ html {
    background-color: #221F1F;
 }
 
+.turquoise {
+    color: #45B5AA;
+}
+
 .logo-btn {
     background-color: transparent;
     font-weight: bold;
@@ -55,4 +59,48 @@ html {
 
 .footer-inner > p > a {
     color: #45B5AA !important;
+}
+
+.modal-open .modal {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.modal.show .modal-dialog {
+    background-color: transparent;
+}
+
+.modal-content {
+    background-color: transparent;
+}
+
+.modal-footer {
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.btn-main-color {
+    color: #45B5AA;
+    background-color: transparent;
+    background-image: none;
+    border-color: #45B5AA;
+}
+
+.btn-main-color:hover {
+    background-color: #45B5AA;
+    color: #221F1F;
+}
+
+.form-control {
+    background-color: #221F1F;
+    color: #F5F5F1;
+}
+
+.form-control:focus {
+    background-color: #221F1F;
+    color: #F5F5F1;
+}
+
+.divider-img {
+    height: auto;
+    width: 250px;
 }

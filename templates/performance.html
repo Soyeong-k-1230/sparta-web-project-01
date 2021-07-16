@@ -1,7 +1,246 @@
 {% extends "base.html" %}
 {% block title %}Performance{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+<link rel="stylesheet" type="text/css" href="../static/css/performance.css">
+{% endblock %}
 {% block content %}
 <div>
-  <h2>This is performance!</h2>
+  <div id="performance" class="mb-5">
+    <div class="this-month">
+      <h4>이달의 공연<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['month'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                {% for performance in performances['month'][6:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="musical mt-3">
+      <h4>뮤지컬<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-2" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['musical'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                {% for performance in performances['musical'][6:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="classic mt-3">
+      <h4>클래식 and 오페라<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-3" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['classic'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                {% for performance in performances['classic'][6:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-3" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="play mt-3">
+      <h4>연극<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-4" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['play'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                {% for performance in performances['play'][6:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-4" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="kids mt-3">
+      <h4>For Kids<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-5" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['kids'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                {% for performance in performances['kids'][6:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-5" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="awards mt-3">
+      <h4>Awards Winning<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="alert('준비중 입니다 :)')">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <div class="mt-4">
+        <div id="gallery-6" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pr-4">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for performance in performances['awards'][0:6] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=performance.mt20id) }}`">
+                  <img class="img-fluid" style="height: 270px;"
+                       src="{{ performance.poster }}" alt="Image Poster"/>
+                  <div class="overlay">
+                    <p class="text-title">{{ performance.prfnm }}</p>
+                    <p class="text-place">{{ performance.fcltynm }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-next" style="width: 20px;" href="#gallery-6" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include '_footer.html' %}
 </div>
 {% endblock %}

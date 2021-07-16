@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Recommend{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/recommend.css">
+<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+{% block content %}
+<div>
+  <div id="detail">
+    <div class="top container">
+      <h2>{{ performance.prfnm }}</h2>
+      <div class="row mt-4">
+        <div class="col animate__animated animate__fadeInLeft">
+          <img src="{{ performance.poster }}" alt="poster" width="300px">
+        </div>
+        <div style="width: 500px" class="col animate__animated animate__fadeInRight">
+          {% if performance.prfpdfrom %}<p><span class="mr-2 font-weight-bold turquoise">공연시작일</span>{{ performance.prfpdfrom }}</p>{% endif %}
+          {% if performance.prfpdto %}<p><span class="mr-2 font-weight-bold turquoise">공연종료일</span>{{ performance.prfpdto }}</p>{% endif %}
+          {% if performance.fcltynm %}<p><span class="mr-2 font-weight-bold turquoise">공연장명</span>{{ performance.fcltynm }}</p>{% endif %}
+          {% if performance.genrenm %}<p><span class="mr-2 font-weight-bold turquoise">장르</span>{{ performance.genrenm }}</p>{% endif %}
+          {% if performance.prfcast %}<p><span class="mr-2 font-weight-bold turquoise">공연출연진</span>{{ performance.prfcast }}</p>{% endif %}
+          {% if performance.prfcrew %}<p><span class="mr-2 font-weight-bold turquoise">공연제작진</span>{{ performance.prfcrew }}</p>{% endif %}
+          {% if performance.prfruntime %}<p><span class="mr-2 font-weight-bold turquoise">공연 런타임</span>{{ performance.prfruntime }}</p>{% endif %}
+          {% if performance.prfage %}<p><span class="mr-2 font-weight-bold turquoise">공연 관람 연령</span>{{ performance.prfage }}</p>{% endif %}
+          {% if performance.entrpsnm %}<p><span class="mr-2 font-weight-bold turquoise">제작사</span>{{ performance.entrpsnm }}</p>{% endif %}
+          {% if performance.prfstate %}<p><span class="mr-2 font-weight-bold turquoise">공연상태</span>{{ performance.prfstate }}</p>{% endif %}
+          {% if performance.dtguidance %}<p><span class="mr-2 font-weight-bold turquoise">공연시간</span>{{ performance.dtguidance }}</p>{% endif %}
+          {% if performance.pcseguidance %}<p><span class="mr-2 font-weight-bold turquoise">티켓가격</span>{{ performance.pcseguidance }}</p>{% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="divider text-center mt-5 animate__animated animate__fadeIn">
+      <img src="../static/image/divider.png" alt="divider" class="divider-img">
+    </div>
+    <div class="bottom container mt-3 mb-5 text-center animate__animated animate__fadeIn ">
+      {% for img in imgs %}
+        <img src="{{ img }}" alt="sub-image">
+      {% endfor %}
+    </div>
+  </div>
+  {% include '_footer.html' %}
+</div>
+{% endblock %}

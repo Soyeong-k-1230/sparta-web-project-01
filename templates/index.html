@@ -11,7 +11,7 @@
       <p>공연 예술(公演藝術, performing art)</p>
       <p style="font-size: 1.2rem;">표현자와 관객이 같은 시간과 공간을 공유하면서</p>
       <p style="font-size: 1.2rem;">그 자리에서 작품의 실체가 만들어져 가는 형태의 예술.</p>
-      <button type="button" class="btn btn-outline-light">공연 보러가기</button>
+      <button type="button" class="btn btn-outline-light" onclick="window.location.href=`{{ url_for('performance') }}`">공연 보러가기</button>
     </div>
     <video
             loop
@@ -22,20 +22,19 @@
             style="width: 100%;"
             src="../static/video/main_v2.mp4"></video>
     <div class="section container">
-      <div></div>
-      <h4>At the moment<span class="ml-3 more-btn" style="font-size: 1rem;">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
+      <h4>At the moment<span class="ml-3 more-btn" style="font-size: 1rem;" onclick="window.location.href=`{{ url_for('performance') }}`">More<i class="fas fa-angle-right ml-2 more-btn"></i></span></h4>
       <div class="mt-5">
         <div id="gallery-1" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
-                {% for performance in performances[0:5] %}
-                <div class="col text-center img-hover-zoom">
+                {% for perform in performances[0:5] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=perform.mt20id) }}`">
                   <img class="img-fluid" style="height: 270px;"
-                       src="{{ performance.poster }}" alt="Image Poster"/>
+                       src="{{ perform.poster }}" alt="Image Poster"/>
                   <div class="overlay">
-                    <p class="text-title">{{ performance.prfnm }}</p>
-                    <p class="text-place">{{ performance.fcltynm }}</p>
+                    <p class="text-title">{{ perform.prfnm }}</p>
+                    <p class="text-place">{{ perform.fcltynm }}</p>
                   </div>
                 </div>
                 {% endfor %}
@@ -43,13 +42,13 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                {% for performance in performances[5:] %}
-                <div class="col text-center img-hover-zoom">
+                {% for perform in performances[5:] %}
+                <div class="col text-center img-hover-zoom" onclick="window.location.href=`{{ url_for('performance_detail', id=perform.mt20id) }}`">
                   <img class="img-fluid" style="height: 270px;"
-                       src="{{ performance.poster }}" alt="Image Poster"/>
+                       src="{{ perform.poster }}" alt="Image Poster"/>
                   <div class="overlay">
-                    <p class="text-title">{{ performance.prfnm }}</p>
-                    <p class="text-place">{{ performance.fcltynm }}</p>
+                    <p class="text-title">{{ perform.prfnm }}</p>
+                    <p class="text-place">{{ perform.fcltynm }}</p>
                   </div>
                 </div>
                 {% endfor %}

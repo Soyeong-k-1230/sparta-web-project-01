@@ -1,7 +1,3 @@
-#board {
-    margin-bottom: 60px;
-}
-
 .header-img {
     position: relative;
     height: 30vh;
@@ -9,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../image/board-header.jpg');
+    background-image: url('../image/recommend-header.jpg');
     background-size: cover;
 }
 
@@ -32,10 +28,8 @@
   background-color: transparent !important;
 }
 
-.bar {
-  border-top: #F5F5F1;
-}
+#search-box {
+    width: 50% !important;
+    margin-top: 40px;
 
-.intro {
-    background-color: transparent;
 }

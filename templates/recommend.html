@@ -1,7 +1,138 @@
 {% extends "base.html" %}
 {% block title %}Recommend{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/recommend.css">
+<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
 {% block content %}
 <div>
-  <h2>This is recommend!</h2>
+  <div id="recommend">
+    <div class="header-img">
+      <h2 class="text">Recommend</h2>
+    </div>
+    <div class="container text-center">
+      <div class="intro my-5 animate__animated animate__fadeIn">
+        <p style="font-size: 1.2rem;">당신을 위한 공연을 추천해드립니다!</p>
+        <p>공연을 추천받으세요 <i class="far fa-smile"></i></p>
+        <div class="mt-4">
+          <button id="btn-search-box" type="button" class="btn btn-outline-light mr-3" onclick="openClose()">검색하기
+          </button>
+          <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#selectModal">
+            추천받기
+          </button>
+        </div>
+        <div id="search-box" style="display:none" class="mx-auto">
+          <div class="container text-center">
+            <div class="input-group mb-3">
+              <input id="search-bar" type="text" class="form-control" placeholder="공연을 검색하세요!"
+                     aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="search-btn" class="btn btn-outline-light" type="button" onclick="searchPerform()"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divider text-center mt-5">
+          <img src="../static/image/divider.png" alt="divider" class="divider-img">
+        </div>
+        <h5 class=" mt-3 mb-5">For You</h5>
+        <div id="performances-box" class="row">
+
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="selectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">방명록 작성하기</h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">이름</label>
+              <input type="email" class="form-control" id="name" placeholder="나는야 OOO">
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">하고싶은 말</label>
+              <textarea class="form-control" id="content" rows="3" placeholder="안녕하세요 :)"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal" onclick="closeModal()">닫기
+            </button>
+            <button onclick="makeComment()" type="button" class="btn btn-main-color">작성하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include '_footer.html' %}
+  </div>
 </div>
+<script>
+  function openClose() {
+      if ($("#search-box").css("display") === "block") {
+          $("#search-box").hide();
+          $("#btn-search-box").text("검색하기");
+      } else {
+          $("#search-box").show();
+          $("#btn-search-box").text("검색닫기");
+      }
+  }
+
+  function searchPerform() {
+      let keyword = $('#search-bar').val()
+      $("#performances-box").html("")
+
+      if (keyword.trim() === '') {
+          alert('검색어를 입력해주세요!')
+          return
+      }
+
+      $.ajax({
+          type: "GET",
+          url: '/search',
+          data: {
+            'keyword': keyword
+          },
+          success: function (response) {
+              let performances = response["all_performances"]
+              console.log(performances)
+
+              if (performances.length === 0) {
+                  let temp = `<p class="mx-auto">죄송합니다. ${keyword}에 대한 검색 결과가 없습니다.<i class="fas fa-sad-tear ml-2"></i></p>`
+                  $('#performances-box').append(temp)
+              } else {
+                  for (let i = 0; i < performances.length; i++) {
+                  let tempHtml = `<div class="col-3 text-center img-hover-zoom" onclick="goDetail('${performances[i]['mt20id']}')">
+                                  <img class="img-fluid" style="height: 270px;"
+                                       src="${performances[i]['poster']}" alt="Image Poster"/>
+                                  <div class="overlay">
+                                    <p class="text-title">${performances[i]['prfnm']}</p>
+                                    <p class="text-place">${performances[i]['fcltynm']}</p>
+                                  </div>`
+
+                  $('#performances-box').append(tempHtml)
+              }
+              }
+
+              $('#search-bar').val('')
+          }
+      })
+  }
+
+  function goDetail(id) {
+     window.location.href = `/performance_detail/${id}`
+  }
+
+  let input = document.getElementById("search-bar");
+  input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+          event.preventDefault()
+          document.getElementById("search-btn").click()
+      }
+  })
+
+</script>
 {% endblock %}

@@ -26,7 +26,7 @@
           <div class="container text-center">
             <div class="input-group mb-3">
               <input id="search-bar" type="text" class="form-control" placeholder="공연을 검색하세요!"
-                     aria-label="Recipient's username" aria-describedby="basic-addon2">
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button id="search-btn" class="btn btn-outline-light" type="button" onclick="searchPerform()"><i class="fas fa-search"></i></button>
               </div>
@@ -47,22 +47,45 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">방명록 작성하기</h5>
+            <h5 class="modal-title" id="exampleModalLabel">추천받기</h5>
           </div>
           <div class="modal-body">
-            <div class="mb-3">
-              <label for="name" class="form-label">이름</label>
-              <input type="email" class="form-control" id="name" placeholder="나는야 OOO">
+            <div class="mb-3 d-flex justify-content-between">
+              <label for="name" class="form-label">좋아하는 장르는?</label>
+              <select id="genre-select" class="form-select" style="width: 200px;">
+                <option selected value="">선택해주세요.</option>
+                {% for genre in genres %}
+                  <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+              </select>
             </div>
-            <div class="mb-3">
-              <label for="content" class="form-label">하고싶은 말</label>
-              <textarea class="form-control" id="content" rows="3" placeholder="안녕하세요 :)"></textarea>
+            <div class="mb-3 d-flex justify-content-between">
+              <label for="name" class="form-label">공연을 보고싶은 지역은? </label>
+              <select id="area-select" class="form-select" style="width: 200px;">
+                <option selected value="">선택해주세요.</option>
+                {% for area in areas %}
+                  <option value="{{ area}}">{{ area }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+              <label for="name" class="form-label mr-3">아이들과 함께 관람하나요?</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true">
+                  <label class="form-check-label" for="inlineRadio1">네</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false">
+                  <label class="form-check-label" for="inlineRadio1">아니오</label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal" onclick="closeModal()">닫기
             </button>
-            <button onclick="makeComment()" type="button" class="btn btn-main-color">작성하기</button>
+            <button onclick="recommendPerform()" type="button" class="btn btn-main-color">추천받기</button>
           </div>
         </div>
       </div>
@@ -98,7 +121,6 @@
           },
           success: function (response) {
               let performances = response["all_performances"]
-              console.log(performances)
 
               if (performances.length === 0) {
                   let temp = `<p class="mx-auto">죄송합니다. ${keyword}에 대한 검색 결과가 없습니다.<i class="fas fa-sad-tear ml-2"></i></p>`
@@ -107,7 +129,7 @@
                   for (let i = 0; i < performances.length; i++) {
                   let tempHtml = `<div class="col-3 text-center img-hover-zoom" onclick="goDetail('${performances[i]['mt20id']}')">
                                   <img class="img-fluid" style="height: 270px;"
-                                       src="${performances[i]['poster']}" alt="Image Poster"/>
+                                      src="${performances[i]['poster']}" alt="Image Poster"/>
                                   <div class="overlay">
                                     <p class="text-title">${performances[i]['prfnm']}</p>
                                     <p class="text-place">${performances[i]['fcltynm']}</p>
@@ -120,6 +142,63 @@
               $('#search-bar').val('')
           }
       })
+  }
+
+  function recommendPerform() {
+    let genre = $('#genre-select').val()
+    let area = $('#area-select').val()
+    let kids = $("input[name='inlineRadioOptions']:checked").val()
+    $("#performances-box").html("")
+
+    if (kids === undefined && genre === "" && area === "") {
+      alert('값을 입력해주세요!')
+      return
+    }
+
+    if (kids === undefined || kids === 'false') kids = false
+    else kids = true
+
+    $.ajax({
+          type: "GET",
+          url: '/recommendation',
+          data: {
+            'genre': genre,
+            'area': area,
+            'kids': kids
+          },
+          success: function (response) {
+              let performances = response["all_performances"]
+
+              if (performances.length === 0) {
+                  let temp = `<p class="mx-auto">죄송합니다. 추천할 공연이 없습니다. <i class="fas fa-sad-tear ml-2"></i></p>`
+                  $('#performances-box').append(temp)
+              } else {
+                  for (let i = 0; i < performances.length; i++) {
+                  let tempHtml = `<div class="col-3 text-center img-hover-zoom" onclick="goDetail('${performances[i]['mt20id']}')">
+                                  <img class="img-fluid" style="height: 270px;"
+                                      src="${performances[i]['poster']}" alt="Image Poster"/>
+                                  <div class="overlay">
+                                    <p class="text-title">${performances[i]['prfnm']}</p>
+                                    <p class="text-place">${performances[i]['fcltynm']}</p>
+                                  </div>`
+                  $('#performances-box').append(tempHtml)
+                }
+              }
+
+              $('#genre-select').val("")
+              $('#area-select').val("")
+
+
+          }
+      })
+
+      $('#selectModal').modal('hide');
+    
+  }
+
+  function closeModal() {
+    let genre = $('#genre-select').val()
+    let area = $('#area-select').val()
   }
 
   function goDetail(id) {

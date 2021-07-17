@@ -14,9 +14,15 @@ AWARD_BASE_URL = 'http://www.kopis.or.kr/openApi/restful/prfawad?service=' + API
 client = MongoClient('localhost', 27017)
 db = client.dbarts
 
+with open('genre.json') as genre_json:
+    genre_data = json.load(genre_json)
+
+with open('area.json') as area_json:
+    area_data = json.load(area_json)
+
 # Date
 today = date.today()
-st_date = '&stdate=' + today.strftime("%Y%m01")
+st_date = '&stdate=' + today.strftime("%Y0101")
 ed_date = '&eddate=' + today.strftime("%Y1231")
 
 
@@ -85,7 +91,7 @@ def performance_detail(id):
 
 @app.route("/recommend")
 def recommend():
-    return render_template('recommend.html')
+    return render_template('recommend.html', genres=genre_data.keys(), areas=area_data.keys())
 
 @app.route("/board")
 def board():
@@ -111,7 +117,6 @@ def read_comments():
     comments = list(db.comment.find({}, {'_id': False}))
     return jsonify({'all_comments': comments})
 
-
 @app.route('/search', methods=['GET'])
 def search_performance():
     nums = 20
@@ -121,6 +126,26 @@ def search_performance():
     performances = get_performances(url)
 
     return jsonify({'all_performances': performances})
+
+@app.route('/recommendation', methods=['GET'])
+def recommend_performance():
+    nums = 20
+    rows = '&rows=' + str(nums)
+    url = BASE_URL + st_date + ed_date + '&cpage=1' + rows + '&prfstate=02'
+    genre = request.args.get('genre')
+    area = request.args.get('area')
+    kids = request.args.get('kids')
+    if genre:
+        url += '&shcate=' + genre_data[genre]
+    if area:
+        url += '&signgucode=' + str(area_data[area])
+    if kids == 'true':
+        url += '&kidstate=Y'
+
+    performances = get_performances(url)
+
+    return jsonify({'all_performances': performances})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
